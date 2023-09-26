@@ -1,4 +1,10 @@
-const people = require('./people')
+const fs = require('fs');
 
-console.log(people.people)
-console.log(people.add(people.a, people.b))
+const ourReadStream = fs.createReadStream(`${__dirname}/bigData.txt`, 'utf8');
+const ourWriteStream = fs.createWriteStream(`${__dirname}/bigDataCopy.txt`);
+
+// ourReadStream.on('data', (data) => {
+//     ourWriteStream.write(data);
+// })
+
+ourReadStream.pipe(ourWriteStream);
